@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wx7.space","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="前言-几句废话前面发了一个“清渊传奇”的传奇类手机游戏，但是由于是H5开发的，实际玩儿起来对服务器的带宽资源要求非常高，低配的玩儿起来图片资源加载很慢，非常影响游戏体验。所以准备写一个服务端搭建的教程，大家可以尝试搭建一个局域网的服务，这样玩儿起来就会非常流场了。当然，局域网就只能自己玩儿了。如果家里有公网IP，共享也是可以的。这里不多说了，上干货。 另外本教程只写了步骤，有些操作并没有写的很详细">
+<meta property="og:type" content="article">
+<meta property="og:title" content="清渊传奇服务端架设教程">
+<meta property="og:url" content="https://wx7.space/posts/qycq-server-install.html">
+<meta property="og:site_name" content="小七爱折腾">
+<meta property="og:description" content="前言-几句废话前面发了一个“清渊传奇”的传奇类手机游戏，但是由于是H5开发的，实际玩儿起来对服务器的带宽资源要求非常高，低配的玩儿起来图片资源加载很慢，非常影响游戏体验。所以准备写一个服务端搭建的教程，大家可以尝试搭建一个局域网的服务，这样玩儿起来就会非常流场了。当然，局域网就只能自己玩儿了。如果家里有公网IP，共享也是可以的。这里不多说了，上干货。 另外本教程只写了步骤，有些操作并没有写的很详细">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-10-23T08:59:41.387Z">
+<meta property="article:modified_time" content="2024-08-14T11:20:23.000Z">
+<meta property="article:author" content="王小七">
+<meta property="article:tag" content="游戏架设">
+<meta property="article:tag" content="单机版网游">
+<meta property="article:tag" content="传奇手游">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://wx7.space/posts/qycq-server-install">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://wx7.space/posts/qycq-server-install.html","path":"/posts/qycq-server-install.html","title":"清渊传奇服务端架设教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>清渊传奇服务端架设教程 | 小七爱折腾</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?dd4faafdc1be82fcc7cfcfc86d57e252"></script>
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小七爱折腾</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">生命在于折腾</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-%E5%87%A0%E5%8F%A5%E5%BA%9F%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">前言-几句废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%87%E8%AE%BE%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">假设条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%AE%9D%E5%A1%94%E5%8F%8A%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E5%BF%85%E8%A6%81%E8%BD%AF%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">安装宝塔及运行环境必要软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">开放端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="nav-number">5.</span> <span class="nav-text">关闭防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0%E6%BA%90%E7%A0%81"><span class="nav-number">6.</span> <span class="nav-text">上传源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E6%9C%8D%E5%8A%A1%E7%AB%AF-IP-%E5%9C%B0%E5%9D%80"><span class="nav-number">7.</span> <span class="nav-text">修改服务端 IP 地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E5%85%A5%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">8.</span> <span class="nav-text">导入数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%BD%91%E7%AB%99"><span class="nav-number">9.</span> <span class="nav-text">创建网站</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E6%B8%B8%E6%88%8F"><span class="nav-number">10.</span> <span class="nav-text">启动游戏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%8D%93%E7%AB%AF"><span class="nav-number">11.</span> <span class="nav-text">安卓端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PC-%E5%BE%AE%E7%AB%AF"><span class="nav-number">12.</span> <span class="nav-text">PC 微端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F"><span class="nav-number">13.</span> <span class="nav-text">结束</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王小七"
+      src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
+  <p class="site-author-name" itemprop="name">王小七</p>
+  <div class="site-description" itemprop="description">把有限的生命投入到无限的折腾中去</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:venuswang2014@outlook.com" title="E-Mail → mailto:venuswang2014@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://wx7.space/posts/qycq-server-install.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
+      <meta itemprop="name" content="王小七">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小七爱折腾">
+      <meta itemprop="description" content="把有限的生命投入到无限的折腾中去">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="清渊传奇服务端架设教程 | 小七爱折腾">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          清渊传奇服务端架设教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-10-23 16:59:41" itemprop="dateCreated datePublished" datetime="2024-10-23T16:59:41+08:00">2024-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-08-14 19:20:23" itemprop="dateModified" datetime="2024-08-14T19:20:23+08:00">2024-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%B8%B8%E6%88%8F/" itemprop="url" rel="index"><span itemprop="name">游戏</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言-几句废话"><a href="#前言-几句废话" class="headerlink" title="前言-几句废话"></a>前言-几句废话</h2><p>前面发了一个“清渊传奇”的传奇类手机游戏，但是由于是H5开发的，实际玩儿起来对服务器的带宽资源要求非常高，低配的玩儿起来图片资源加载很慢，非常影响游戏体验。所以准备写一个服务端搭建的教程，大家可以尝试搭建一个局域网的服务，这样玩儿起来就会非常流场了。当然，局域网就只能自己玩儿了。如果家里有公网IP，共享也是可以的。这里不多说了，上干货。</p>
+<p>另外本教程只写了步骤，有些操作并没有写的很详细，需要一些基础知识，稍微研究一下就好。如果还是搞不定可以加群问一下，知无不言言无不尽。</p>
+<span id="more"></span>
+
+<h2 id="假设条件"><a href="#假设条件" class="headerlink" title="假设条件"></a>假设条件</h2><p>清渊传奇架设需要准备：</p>
+<ul>
+<li><p>linux服务器，硬件配置用2核2G足够，操作系统建议 CentOs 7.6，其他版本的也不是不行，理论上大差不大。如果你要搭建公网版本的，推荐腾讯云轻量应用服务器，性价比高。</p>
+</li>
+<li><p>游戏源码，关注我的公众号 “小七爱折腾”，发送 “清渊传奇源码” 获取。（如果没东西可能是还没传完）</p>
+</li>
+</ul>
+<p>游戏会占大概 1600M 的运行内存，因安卓端和 PC 端只是架子，具体的游戏资源还是需要下载，</p>
+<h2 id="安装宝塔及运行环境必要软件"><a href="#安装宝塔及运行环境必要软件" class="headerlink" title="安装宝塔及运行环境必要软件"></a>安装宝塔及运行环境必要软件</h2><p>宝塔是一个服务器运维管理软件，安装命令：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh</span><br></pre></td></tr></table></figure>
+
+<p>安装完后，按照提示信息登录宝塔，并在宝塔软件商店中搜索以下软件安装：</p>
+<ul>
+<li>web服务器：Nginx1.20</li>
+<li>数据库：Mysql 5.7</li>
+<li>编程语言：PHP 7.3</li>
+<li>数据库管理工具：phpMyAdmin 5.0 （这个不是必须的，如果你不打算看数据或者会使用 mysql 的命令行，这东西用不上）</li>
+</ul>
+<h2 id="开放端口"><a href="#开放端口" class="headerlink" title="开放端口"></a>开放端口</h2><p>如果使用腾讯云或者阿里云这些云服务的服务器，需要将端口放行。简单粗暴的1-65535，保证没有问题。</p>
+<p>如果搭建局域网的，那无所谓，留意一下宝塔菜单安全策略里面防火墙有没有打开就可以了。宝塔菜单也开放所有端口。</p>
+<p>如果你做单独的端口映射，我统计了几个端口需要放行的：</p>
+<p>80,9001,10001,31000,35000,5660,11001,23101,34000,43101,82,8500,35010,36944</p>
+<p>可能有多余的，但是目前测试下来，至少开放这些就可以正常访问了。</p>
+<h2 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h2><p>连接到服务器上，通过命令关闭防火墙，并禁止防火墙的开机自动启动：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop firewalld.service</span><br><span class="line">systemctl disable firewalld.service</span><br></pre></td></tr></table></figure>
+
+<h2 id="上传源码"><a href="#上传源码" class="headerlink" title="上传源码"></a>上传源码</h2><p>拿到源码后，将qycq.zip压缩文件通过宝塔上传到根目录，也可以用ftp或者WinCP，方法不限，只有把文件弄到服务器里就行了。</p>
+<p>上传成功后，剪切粘贴到根目录，并解压到根目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /</span><br><span class="line">unzip -o qycq.zip</span><br></pre></td></tr></table></figure>
+
+<p>解压完成后，命令授予 777 权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chmod -R 777 /data</span><br><span class="line">chmod -R 777 /www/wwwroot</span><br><span class="line">chmod -R 777 /etc/yum/wch/88888888888888888</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改服务端-IP-地址"><a href="#修改服务端-IP-地址" class="headerlink" title="修改服务端 IP 地址"></a>修改服务端 IP 地址</h2><p>源码中的 IP（8.218.236.104），需要替换成你自己的服务器 IP。</p>
+<p>如果是局域网，就用192.168.x.x 的 IP。</p>
+<p>也支持域名，替换就是把所有的IP都换成域名即可。</p>
+<ol>
+<li>&#x2F;data&#x2F;yfbx_server&#x2F;cross&#x2F;LogicServer&#x2F;data&#x2F;config&#x2F;Cross&#x2F;CrossSourceServer.config</li>
+<li>&#x2F;data&#x2F;yfbx_server&#x2F;s1&#x2F;LogicServer&#x2F;data&#x2F;config&#x2F;Cross&#x2F;CrossSourceServer.config</li>
+<li>&#x2F;www&#x2F;wwwroot&#x2F;web&#x2F;js&#x2F;index.js</li>
+<li>&#x2F;www&#x2F;wwwroot&#x2F;web&#x2F;js&#x2F;JS原</li>
+<li>&#x2F;www&#x2F;wwwroot&#x2F;web&#x2F;config.php</li>
+<li>&#x2F;www&#x2F;wwwroot&#x2F;web&#x2F;ios_old.html</li>
+<li>&#x2F;www&#x2F;wwwroot&#x2F;admin&#x2F;application&#x2F;extra&#x2F;site.php</li>
+</ol>
+<h2 id="导入数据库"><a href="#导入数据库" class="headerlink" title="导入数据库"></a>导入数据库</h2><p>当前资源配置的默认数据库为用户名root密码为 85b5c930502992d4</p>
+<p>如果想修改，找到配置文件中所有的用户名和密码，挨个替换就好。简单点儿就直接把数据库的密码改了，配置文件就不用动了。</p>
+<p>另外，数据库的配置需要增加一条：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lower_case_table_names=1</span><br></pre></td></tr></table></figure>
+
+<p>打开Mysql的配置，在其配置文件的26行直接增加这一句，把表名字统统使用小写。</p>
+<p>完成上述修改后，使用命令导入数据库，资料包里面有导入脚本：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /data &amp;&amp; ./sk</span><br></pre></td></tr></table></figure>
+
+<p>在数据库界面同步数据库会出现 8 个数据库，说明导入成功。</p>
+<h2 id="创建网站"><a href="#创建网站" class="headerlink" title="创建网站"></a>创建网站</h2><p>清渊传奇需要创建两个站点，</p>
+<ul>
+<li>一个是游戏站点，域名为IP:80，根目录为 &#x2F;www&#x2F;wwwroot&#x2F;web，PHP 选择 7.3 版本。</li>
+</ul>
+<p>创建完后配置伪静态设置如下（重要）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  if (!-e $request_filename) &#123;</span><br><span class="line">    rewrite  ^/(.*)$  /$1.php  last;</span><br><span class="line">    break;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>还有一个是后台站点，域名为127.0.0.1:82，根目录为 &#x2F;www&#x2F;wwwroot&#x2F;admin，PHP 选择 7.3 版本。</li>
+</ul>
+<p>创建完后配置网站目录中的运行目录设置为&#x2F;public。</p>
+<p>伪静态设置如下（重要）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line"> if (!-e $request_filename)&#123;</span><br><span class="line">  rewrite  ^(.*)$  /index.php?s=$1  last;   break;</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="启动游戏"><a href="#启动游戏" class="headerlink" title="启动游戏"></a>启动游戏</h2><p>以上步骤都操作完毕，就到了激动人心的启动游戏啦！</p>
+<p>第一次启动游戏之前我们重启下 Nginx 和 MySQL：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx </span><br><span class="line">systemctl restart mysqld </span><br></pre></td></tr></table></figure>
+
+<p>添加软连接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /</span><br><span class="line">ln -sf /usr/lib64/mysql/libmysqlclient.so.18 /usr/lib64/libmysqlclient.so.16</span><br></pre></td></tr></table></figure>
+
+<p>然后启动游戏（以后每次启动游戏，只执行下面的命令即可）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /data/yfbx_server/build &amp;&amp; ./run.sh</span><br><span class="line"></span><br><span class="line">cd /data/yfbx_server/s1 &amp;&amp; ./run.sh</span><br><span class="line"></span><br><span class="line">cd /data/yfbx_server/cross &amp;&amp; ./run.sh</span><br></pre></td></tr></table></figure>
+
+<p>查看下服务端口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -lntp</span><br></pre></td></tr></table></figure>
+
+<p>浏览器打开链接 <a target="_blank" rel="noopener" href="http://ip/play%EF%BC%8C%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AE%E6%B8%85%E6%B8%8A%E4%BC%A0%E5%A5%87">http://IP/play，就可以访问清渊传奇</a> H5 版本啦。<br>我已经架设好这个地址是：<a target="_blank" rel="noopener" href="http://qycq.runtuge.com/play">http://qycq.runtuge.com/play</a> 可以试玩一下看看，但是带宽不大，资源加载可能会很慢。</p>
+<h2 id="安卓端"><a href="#安卓端" class="headerlink" title="安卓端"></a>安卓端</h2><p>清渊传奇安卓端，需要修改文件只有一个，我放在了安卓修改目录下：</p>
+<p>\assets\apps\H546F5F02\www\manifest.json</p>
+<p>用notepad++打开，修改 IP（8.218.236.104），替换成你自己的服务器 IP。然后用好压打开安卓端清渊传奇.apk，将修改好的文件，按照目录找到相应的文件，替换掉即可。</p>
+<p>替换后，使用ApkTool工具进行签名就可以安装到手机上玩耍了。Heppy~~~</p>
+<h2 id="PC-微端"><a href="#PC-微端" class="headerlink" title="PC 微端"></a>PC 微端</h2><p>PC 端修也不难主要用到分享资源中的 “清渊传奇PC端.zip” 和 “PC端修改工具.zip”，都解压好，双击启动PC端修改工具中的pexplorer.exe，将清渊传奇PC端中的清渊传奇.exe拖进修改工具界面。</p>
+<p>把里面的IP地址都替换成你自己的然后保存替换掉原来的exe 就行了。</p>
+<p>就写到这吧，如果架设过程中遇到了问题，可以来关注微信公众号“小七爱折腾”，能解决的一定解决。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>再次完成一次折腾记录。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6db9d.jpg" alt="王小七 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e4a669.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E6%B8%B8%E6%88%8F%E6%9E%B6%E8%AE%BE/" rel="tag"># 游戏架设</a>
+              <a href="/tags/%E5%8D%95%E6%9C%BA%E7%89%88%E7%BD%91%E6%B8%B8/" rel="tag"># 单机版网游</a>
+              <a href="/tags/%E4%BC%A0%E5%A5%87%E6%89%8B%E6%B8%B8/" rel="tag"># 传奇手游</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/yuanshen-server-setup.html" rel="prev" title="原神服务端配置教程">
+                  <i class="fa fa-angle-left"></i> 原神服务端配置教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/pve-disk-expand.html" rel="next" title="PVE系列-虚拟机磁盘扩容（非LVM）">
+                  PVE系列-虚拟机磁盘扩容（非LVM） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">王小七</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

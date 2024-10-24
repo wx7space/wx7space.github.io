@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/ 
+Allow: /post/ 
+Allow: /about/
+Disallow: /js/
+Disallow: /css/
+Disallow: /fonts/
+
+Sitemap: https://runtuge.com/sitemap.xml
+Sitemap: https://runtuge.com/baidusitemap.xml
