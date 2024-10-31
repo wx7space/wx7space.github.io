@@ -9,5 +9,5 @@ Disallow: /js/
 Disallow: /css/
 Disallow: /fonts/
 
-Sitemap: https://runtuge.com/sitemap.xml
-Sitemap: https://runtuge.com/baidusitemap.xml
+Sitemap: https://wx7.space/sitemap.xml
+Sitemap: https://wx7.space/baidusitemap.xml
