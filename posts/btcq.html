@@ -19,31 +19,37 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wx7.space","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="前言几句废话JAVA 作为一门开发语言，有着非常多的应用场景，其一次编译到处运行的特点，也为开发人员提供了极大的便利性。本文记录在CentOS 7环境下，安装JAVA 17，并配置环境变量。Windows 环境类似，但是Windows 有集成的安装包，基本上使用默认配置一路下一步就能完成安装。">
+    <meta name="description" content="前言-几句废话最近有点儿忙，折腾的进度有点儿荒废了。忙里偷闲补一个，大家见谅。🙈 这次给大家带来的这款传奇应该是粉丝玩家呼声最高的游戏了，我自己架设过很多版本的传奇了，各种引擎也都略有接触，战神引擎是手游里面对当年“热血传奇”还原度最高的一款引擎。 这次给大家带来的是 1.80 精品微变版传奇，安卓苹果双端，还原经典有激情更有情怀！快来试试是不是你想要的热血传奇！ 由于时间问题，先把验证架设好的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CentOS7 JAVA 安装与配置">
-<meta property="og:url" content="https://wx7.space/posts/jave-install.html">
+<meta property="og:title" content="还原经典!霸天传奇手游激情上线">
+<meta property="og:url" content="https://wx7.space/posts/btcq.html">
 <meta property="og:site_name" content="小七爱折腾">
-<meta property="og:description" content="前言几句废话JAVA 作为一门开发语言，有着非常多的应用场景，其一次编译到处运行的特点，也为开发人员提供了极大的便利性。本文记录在CentOS 7环境下，安装JAVA 17，并配置环境变量。Windows 环境类似，但是Windows 有集成的安装包，基本上使用默认配置一路下一步就能完成安装。">
+<meta property="og:description" content="前言-几句废话最近有点儿忙，折腾的进度有点儿荒废了。忙里偷闲补一个，大家见谅。🙈 这次给大家带来的这款传奇应该是粉丝玩家呼声最高的游戏了，我自己架设过很多版本的传奇了，各种引擎也都略有接触，战神引擎是手游里面对当年“热血传奇”还原度最高的一款引擎。 这次给大家带来的是 1.80 精品微变版传奇，安卓苹果双端，还原经典有激情更有情怀！快来试试是不是你想要的热血传奇！ 由于时间问题，先把验证架设好的">
 <meta property="og:locale">
-<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718c923c57c7.png">
-<meta property="article:published_time" content="2024-08-19T09:51:07.000Z">
-<meta property="article:modified_time" content="2024-10-23T10:42:20.720Z">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965b946e8.jpg">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/67289634bdc44.jpg">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965c15d42.jpg">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965be90fe.jpg">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965c22c57.jpg">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965c18561.jpg">
+<meta property="article:published_time" content="2024-11-04T09:34:02.000Z">
+<meta property="article:modified_time" content="2024-11-04T09:41:58.309Z">
 <meta property="article:author" content="王小七">
-<meta property="article:tag" content="软件安装">
-<meta property="article:tag" content="JAVA配置">
+<meta property="article:tag" content="单机版网游">
+<meta property="article:tag" content="传奇手游">
+<meta property="article:tag" content="GM游戏">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718c923c57c7.png">
+<meta name="twitter:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965b946e8.jpg">
 
 
-<link rel="canonical" href="https://wx7.space/posts/jave-install">
+<link rel="canonical" href="https://wx7.space/posts/btcq">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://wx7.space/posts/jave-install.html","path":"/posts/jave-install.html","title":"CentOS7 JAVA 安装与配置"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://wx7.space/posts/btcq.html","path":"/posts/btcq.html","title":"还原经典!霸天传奇手游激情上线"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>CentOS7 JAVA 安装与配置 | 小七爱折腾</title>
+<title>还原经典!霸天传奇手游激情上线 | 小七爱折腾</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js"></script>
@@ -118,7 +124,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%E5%87%A0%E5%8F%A5%E5%BA%9F%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">前言几句废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%90%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">材料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E7%BD%AE%E6%9D%A1%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">前置条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">安装步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">5.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F"><span class="nav-number">6.</span> <span class="nav-text">结束</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-%E5%87%A0%E5%8F%A5%E5%BA%9F%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">前言-几句废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%B8%E6%88%8F%E4%BD%93%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">游戏体验</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F"><span class="nav-number">3.</span> <span class="nav-text">结束</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -176,7 +182,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
-    <link itemprop="mainEntityOfPage" href="https://wx7.space/posts/jave-install.html">
+    <link itemprop="mainEntityOfPage" href="https://wx7.space/posts/btcq.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
@@ -189,12 +195,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="CentOS7 JAVA 安装与配置 | 小七爱折腾">
+      <meta itemprop="name" content="还原经典!霸天传奇手游激情上线 | 小七爱折腾">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CentOS7 JAVA 安装与配置
+          还原经典!霸天传奇手游激情上线
         </h1>
 
         <div class="post-meta-container">
@@ -204,15 +210,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2024-08-19 17:51:07" itemprop="dateCreated datePublished" datetime="2024-08-19T17:51:07+08:00">2024-08-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2024-10-23 18:42:20" itemprop="dateModified" datetime="2024-10-23T18:42:20+08:00">2024-10-23</time>
+      <time title="创建时间：2024-11-04 17:34:02 / 修改时间：17:41:58" itemprop="dateCreated datePublished" datetime="2024-11-04T17:34:02+08:00">2024-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -220,7 +220,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" itemprop="url" rel="index"><span itemprop="name">软件安装</span></a>
+          <a href="/categories/%E6%B8%B8%E6%88%8F/" itemprop="url" rel="index"><span itemprop="name">游戏</span></a>
         </span>
     </span>
 
@@ -240,8 +240,8 @@
     </span>
     <span class="post-meta-item-text">Waline：</span>
   
-    <a title="waline" href="/posts/jave-install.html#waline" itemprop="discussionUrl">
-      <span class="post-comments-count waline-comment-count" data-path="/posts/jave-install.html" itemprop="commentCount"></span>
+    <a title="waline" href="/posts/btcq.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/btcq.html" itemprop="commentCount"></span>
     </a>
   </span>
   
@@ -254,31 +254,33 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="前言几句废话"><a href="#前言几句废话" class="headerlink" title="前言几句废话"></a>前言几句废话</h2><p>JAVA 作为一门开发语言，有着非常多的应用场景，其一次编译到处运行的特点，也为开发人员提供了极大的便利性。本文记录在CentOS 7环境下，安装JAVA 17，并配置环境变量。Windows 环境类似，但是Windows 有集成的安装包，基本上使用默认配置一路下一步就能完成安装。</p>
-<span id="more"></span>
-
-<h2 id="材料"><a href="#材料" class="headerlink" title="材料"></a>材料</h2><ul>
-<li>JAVA 软件安装包 <a target="_blank" rel="noopener" href="https://download.oracle.com/java/17/latest/jdk-17_linux-x64_bin.tar.gz">官方下载地址</a></li>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言-几句废话"><a href="#前言-几句废话" class="headerlink" title="前言-几句废话"></a>前言-几句废话</h2><p>最近有点儿忙，折腾的进度有点儿荒废了。忙里偷闲补一个，大家见谅。🙈</p>
+<p>这次给大家带来的这款传奇应该是粉丝玩家呼声最高的游戏了，我自己架设过很多版本的传奇了，各种引擎也都略有接触，战神引擎是手游里面对当年“热血传奇”还原度最高的一款引擎。</p>
+<p>这次给大家带来的是 1.80 精品微变版传奇，安卓苹果双端，还原经典有激情更有情怀！快来试试是不是你想要的热血传奇！</p>
+<p>由于时间问题，先把验证架设好的游戏客户端放出来，感兴趣的朋友可以先体验一下，架设教程后面找时间整理出来。</p>
+<h2 id="游戏体验"><a href="#游戏体验" class="headerlink" title="游戏体验"></a>游戏体验</h2><ul>
+<li>客户端获取</li>
 </ul>
-<h2 id="前置条件"><a href="#前置条件" class="headerlink" title="前置条件"></a>前置条件</h2><ul>
-<li>通过<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/downloads/?er=221886#java17">官方网址</a>或其他渠道，下载软件安装包。我这里选用的是编译好的二进制压缩包。</li>
-</ul>
-<p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718c923c57c7.png" alt="JAVA安装包下载" title="官网下载"></p>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><ul>
-<li>上传Java软件，并解压到&#x2F;usr&#x2F;local 目录。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local</span><br><span class="line"></span><br><span class="line">tar -zxvf OpenJDK17U-jdk_x64_linux_hotspot_17.0.10_7.tar.gz </span><br><span class="line"></span><br><span class="line">mv jdk-17.0.10+7 java</span><br></pre></td></tr></table></figure>
-
+<p>关注公众号“小七爱折腾”，回复“霸天传奇”，即可获取客户端下载链接。</p>
+<p>同时提供了安卓和苹果版本，苹果版本需要自己完成签名字，否则无法安装。</p>
 <ul>
-<li>配置Java 环境变量。</li>
+<li>开始游戏</li>
 </ul>
-<h2 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h2><p>打开&#x2F;etc&#x2F;profile 文件，在文件末尾加入：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME=/usr/local/java</span><br><span class="line">export PATH=$PATH:$JAVA_HOME/bin</span><br><span class="line">export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>如果需要配置用户级环境变量，在用户的 .bashrc 里面增加环境变量也是一样的。</p>
-<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>以上是二进制文件直接配置的安装方法，如果不需要这么高版本，也可以直接使用 yum 源进行安装。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install java</span><br></pre></td></tr></table></figure>
-
-<p>CentOS 7 默认是1.8版本的，并且会安装它的依赖项。</p>
+<p>激情开始<br><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965b946e8.jpg" alt="Screenshot_20241104_084713_com.gowlom2.legend.jpg"></p>
+<p>账户注册、登录</p>
+<p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/67289634bdc44.jpg" alt="Screenshot_20241104_084730_com.gowlom2.legend.jpg"></p>
+<p>选择大区<br>​<img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965c15d42.jpg" alt="Screenshot_20241104_084708_com.gowlom2.legend.jpg"></p>
+<p>创建角色<br><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965be90fe.jpg" alt="Screenshot_20241104_083713_com.gowlom2.legend.jpg"></p>
+<p>盟重土城<br><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965c22c57.jpg" alt="Screenshot_20241104_084135_com.gowlom2.legend.jpg"></p>
+<p>开始战斗​<br><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/11/04/6728965c18561.jpg" alt="Screenshot_20241104_084406_com.gowlom2.legend.jpg"></p>
+<p>从登陆界面到游戏画面，还原度都非常高，建议大家慢慢玩儿，重温当年的游戏体验。</p>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><ul>
+<li>如果你也喜欢折腾，可关注公众号“小七爱折腾”，一起嗨。（资源免费赠送）</li>
+</ul>
+<p>关注公众号获取更多特权。嗨起来吧～。～</p>
+<p>我只是一个爱折腾的人，游戏只是娱乐，折腾才是目的。</p>
+<p>生命在于折腾~</p>
+<p>PS：上述资源来源于网络，仅用于学习和自娱自乐。</p>
 
     </div>
 
@@ -321,22 +323,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/" rel="tag"># 软件安装</a>
-              <a href="/tags/JAVA%E9%85%8D%E7%BD%AE/" rel="tag"># JAVA配置</a>
+              <a href="/tags/%E5%8D%95%E6%9C%BA%E7%89%88%E7%BD%91%E6%B8%B8/" rel="tag"># 单机版网游</a>
+              <a href="/tags/%E4%BC%A0%E5%A5%87%E6%89%8B%E6%B8%B8/" rel="tag"># 传奇手游</a>
+              <a href="/tags/GM%E6%B8%B8%E6%88%8F/" rel="tag"># GM游戏</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/posts/hexo-draft.html" rel="prev" title="hexo系列-从草稿到文章发布">
-                  <i class="fa fa-angle-left"></i> hexo系列-从草稿到文章发布
+                <a href="/posts/vmware-network-fix.html" rel="prev" title="VMWare系列-虚拟机网络异常问题排查">
+                  <i class="fa fa-angle-left"></i> VMWare系列-虚拟机网络异常问题排查
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/mongodb-install.html" rel="next" title="CentOS7 MongoDB 安装与配置">
-                  CentOS7 MongoDB 安装与配置 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -419,7 +419,7 @@
 
 
 
-<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.wx7.space","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/jave-install.html"}</script>
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.wx7.space","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/btcq.html"}</script>
 <link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
 <script>
 document.addEventListener('page:loaded', () => {
