@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://wx7.space//posts/qycq-server-install.html</loc>
+    <loc>https://wx7.space//posts/os-ssh-deny.html</loc>
     <lastmod>2024-11-18</lastmod>
   </url>
   <url>
-    <loc>https://wx7.space//posts/os-ssh-deny.html</loc>
+    <loc>https://wx7.space//posts/qycq.html</loc>
+    <lastmod>2024-11-18</lastmod>
+  </url>
+  <url>
+    <loc>https://wx7.space//posts/qycq-server-install.html</loc>
     <lastmod>2024-11-18</lastmod>
   </url>
   <url>
@@ -38,10 +42,6 @@
   </url>
   <url>
     <loc>https://wx7.space//posts/yuanshen.html</loc>
-    <lastmod>2024-10-23</lastmod>
-  </url>
-  <url>
-    <loc>https://wx7.space//posts/qycq.html</loc>
     <lastmod>2024-10-23</lastmod>
   </url>
   <url>
