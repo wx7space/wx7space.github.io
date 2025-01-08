@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"wx7.space","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wx7.space","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="前言–几句废话Hexo是一款基于Node.js的静态博客生成器，因其高效和易用性受到广泛欢迎。waline是一个新兴的轻量级评论系统，支持多种数据库和部署方式，适合在Hexo上使用。本文将详细介绍如何在Hexo中配置waline评论系统，以实现用户评论功能。 当前的系统就是使用waline配置的评论系统，把这篇文章拉到最后，你就能看到配置后的成品啦。评论一下试试吧~">
 <meta property="og:type" content="article">
@@ -148,7 +148,7 @@
 </div>
   <div class="links-of-author animated">
       <span class="links-of-author-item">
-        <a href="mailto:venuswang2014@outlook.com" title="E-Mail → mailto:venuswang2014@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+        <span class="exturl" data-url="bWFpbHRvOnZlbnVzd2FuZzIwMTRAb3V0bG9vay5jb20=" title="E-Mail → mailto:venuswang2014@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
       </span>
   </div>
 
@@ -257,9 +257,9 @@
 <h3 id="3-安装依赖插件"><a href="#3-安装依赖插件" class="headerlink" title="3. 安装依赖插件"></a>3. 安装依赖插件</h3><p>我们将使用<code>hexo-next</code>主题作为示例，并安装必要的插件：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-theme-next --save</span><br></pre></td></tr></table></figure>
 
-<h3 id="4-注册Waline账户"><a href="#4-注册Waline账户" class="headerlink" title="4. 注册Waline账户"></a>4. 注册Waline账户</h3><p>前往<a target="_blank" rel="noopener" href="https://waline.js.org/">Waline官网</a>注册一个账号，获取AppID、AppKey和MasterKey，这些信息稍后会用到。</p>
+<h3 id="4-注册Waline账户"><a href="#4-注册Waline账户" class="headerlink" title="4. 注册Waline账户"></a>4. 注册Waline账户</h3><p>前往<span class="exturl" data-url="aHR0cHM6Ly93YWxpbmUuanMub3JnLw==">Waline官网<i class="fa fa-external-link-alt"></i></span>注册一个账号，获取AppID、AppKey和MasterKey，这些信息稍后会用到。</p>
 <h2 id="配置Waline服务端"><a href="#配置Waline服务端" class="headerlink" title="配置Waline服务端"></a>配置Waline服务端</h2><h3 id="1-选择数据库和服务端"><a href="#1-选择数据库和服务端" class="headerlink" title="1. 选择数据库和服务端"></a>1. 选择数据库和服务端</h3><p>Waline支持多种数据库和服务端部署方式，这里我们使用Vercel来部署服务端，并选择LeanCloud国际版作为数据库。</p>
-<h3 id="2-注册LeanCloud国际版"><a href="#2-注册LeanCloud国际版" class="headerlink" title="2. 注册LeanCloud国际版"></a>2. 注册LeanCloud国际版</h3><p>访问<a target="_blank" rel="noopener" href="https://leancloud.app/">LeanCloud国际版</a>，完成注册并创建一个应用。</p>
+<h3 id="2-注册LeanCloud国际版"><a href="#2-注册LeanCloud国际版" class="headerlink" title="2. 注册LeanCloud国际版"></a>2. 注册LeanCloud国际版</h3><p>访问<span class="exturl" data-url="aHR0cHM6Ly9sZWFuY2xvdWQuYXBwLw==">LeanCloud国际版<i class="fa fa-external-link-alt"></i></span>，完成注册并创建一个应用。</p>
 <h3 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3. 配置环境变量"></a>3. 配置环境变量</h3><p>在你的Vercel项目中，添加以下环境变量：</p>
 <ul>
 <li><code>LEAN_ID</code>: 你的LeanCloud AppID</li>
@@ -334,8 +334,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/posts/hexo-next-themes.html" rel="next" title="hexo系列-next主题配置与优化">
-                  hexo系列-next主题配置与优化 <i class="fa fa-angle-right"></i>
+                <a href="/posts/qycq-server-install.html" rel="next" title="清渊传奇服务端架设教程">
+                  清渊传奇服务端架设教程 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
