@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wx7.space","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="DeepSeek系列-本地部署 DeepSeek R1 教程">
+<meta property="og:url" content="https://wx7.space/posts/deepseek-local-install.html">
+<meta property="og:site_name" content="小七爱折腾">
+<meta property="og:locale">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a815f5e1.png">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a817817b.png">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a817c19e.png">
+<meta property="article:published_time" content="2025-02-13T02:49:11.000Z">
+<meta property="article:modified_time" content="2025-02-13T04:09:29.818Z">
+<meta property="article:author" content="王小七">
+<meta property="article:tag" content="DeepSeek">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a815f5e1.png">
+
+
+<link rel="canonical" href="https://wx7.space/posts/deepseek-local-install">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://wx7.space/posts/deepseek-local-install.html","path":"/posts/deepseek-local-install.html","title":"DeepSeek系列-本地部署 DeepSeek R1 教程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>DeepSeek系列-本地部署 DeepSeek R1 教程 | 小七爱折腾</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?dd4faafdc1be82fcc7cfcfc86d57e252"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline.wx7.space">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小七爱折腾</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">折腾过程中的踩坑记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81DeepSeek-R1-%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">一、DeepSeek R1 简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">二、为什么选择本地部署？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%A1%AC%E4%BB%B6%E8%A6%81%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">三、硬件要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.</span> <span class="nav-text">四、安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E5%AE%89%E8%A3%85-Ollama"><span class="nav-number">4.1.</span> <span class="nav-text">步骤 1：安装 Ollama</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E4%B8%8B%E8%BD%BD-DeepSeek-R1-%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.2.</span> <span class="nav-text">步骤 2：下载 DeepSeek R1 模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4-3%EF%BC%9A%E5%AE%89%E8%A3%85-Chatbox%EF%BC%88%E5%8F%AF%E9%80%89%EF%BC%89"><span class="nav-number">4.3.</span> <span class="nav-text">步骤 3：安装 Chatbox（可选）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8A%9F%E8%83%BD%E6%BC%94%E7%A4%BA"><span class="nav-number">5.</span> <span class="nav-text">五、功能演示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">六、总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王小七"
+      src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
+  <p class="site-author-name" itemprop="name">王小七</p>
+  <div class="site-description" itemprop="description">把有限的生命投入到无限的折腾中去</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnZlbnVzd2FuZzIwMTRAb3V0bG9vay5jb20=" title="E-Mail → mailto:venuswang2014@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://wx7.space/posts/deepseek-local-install.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
+      <meta itemprop="name" content="王小七">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小七爱折腾">
+      <meta itemprop="description" content="把有限的生命投入到无限的折腾中去">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="DeepSeek系列-本地部署 DeepSeek R1 教程 | 小七爱折腾">
+      <meta itemprop="description" content="本文介绍 DeepSeek R1 本地部署的方法，分别介绍 Linux、Windows、Mac多种操作系统的配置方法。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DeepSeek系列-本地部署 DeepSeek R1 教程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-13 10:49:11 / 修改时间：12:09:29" itemprop="dateCreated datePublished" datetime="2025-02-13T10:49:11+08:00">2025-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/AI/" itemprop="url" rel="index"><span itemprop="name">AI</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/deepseek-local-install.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/deepseek-local-install.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">本文介绍 DeepSeek R1 本地部署的方法，分别介绍 Linux、Windows、Mac多种操作系统的配置方法。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h3 id="一、DeepSeek-R1-简介"><a href="#一、DeepSeek-R1-简介" class="headerlink" title="一、DeepSeek R1 简介"></a><strong>一、DeepSeek R1 简介</strong></h3><p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a815f5e1.png" alt="deepseek-R1.png">DeepSeek R1 是一款开源 AI 模型，其性能可与 OpenAI 的 GPT-4 和 Claude 3.5 Sonnet 等顶级模型媲美，尤其在数学、编程和推理等任务上表现出色。最重要的是，它是免费、私密的，可以在本地硬件上离线运行。</p>
+<p>DeepSeek R1 提供多个参数规模的版本，从轻量级的 1.5B 参数模型到高性能的 70B 版本。它基于 Qwen 7B 架构的精简优化版本，既保持强大性能，又具备更高的计算效率。</p>
+<p>其主要亮点包括：</p>
+<ul>
+<li><p>完全开源，可自由使用。</p>
+</li>
+<li><p>支持本地运行，无需依赖云服务器。</p>
+</li>
+<li><p>数据完全可控，确保隐私安全。</p>
+</li>
+</ul>
+<h3 id="二、为什么选择本地部署？"><a href="#二、为什么选择本地部署？" class="headerlink" title="二、为什么选择本地部署？"></a><strong>二、为什么选择本地部署？</strong></h3><p>本地运行 AI 模型有以下优势：</p>
+<ul>
+<li>隐私保障：有些公司保密需求很高，需要所有数据均存储在本地，避免敏感信息泄露，甚至网络都是隔离的。个人如果不想让自己的检索习惯暴露在互联网上，也可以选择本地部署；</li>
+<li>零额外成本：DeepSeek R1 免费运行，无需订阅或额外费用。当然，这仅仅是指不需要因为使用 API 付费，本地搭建的硬件成本还是要承担的；</li>
+<li>完全控制：可以进行微调和本地优化，无需外部依赖。</li>
+</ul>
+<h3 id="三、硬件要求"><a href="#三、硬件要求" class="headerlink" title="三、硬件要求"></a><strong>三、硬件要求</strong></h3><p>部署 DeepSeek R1 需要一定的硬件资源，以下是不同版本对计算机配置的基本要求：</p>
+<table>
+<thead>
+<tr>
+<th>DeepSeek R1 版本</th>
+<th>合适的显存</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1.5b（最小）</td>
+<td>CPU 或 4GB GPU</td>
+</tr>
+<tr>
+<td>8b</td>
+<td>8GB GPU</td>
+</tr>
+<tr>
+<td>14b</td>
+<td>16GB GPU</td>
+</tr>
+<tr>
+<td>32b</td>
+<td>24GB GPU</td>
+</tr>
+<tr>
+<td>70b（最大）</td>
+<td>48GB GPU</td>
+</tr>
+</tbody></table>
+<p>即使你的硬件资源不是很充足，也不用担心，1.5b仍然可以尝试一下。最小的1.5b 只使用CPU 也能够运行起来。</p>
+<h3 id="四、安装步骤"><a href="#四、安装步骤" class="headerlink" title="四、安装步骤"></a><strong>四、安装步骤</strong></h3><h4 id="步骤-1：安装-Ollama"><a href="#步骤-1：安装-Ollama" class="headerlink" title="步骤 1：安装 Ollama"></a>步骤 1：安装 Ollama<img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a817817b.png" alt="ollama_download.png"></h4><p>Ollama 是一款本地 AI 运行工具，可帮助用户轻松运行 DeepSeek R1。</p>
+<ul>
+<li>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9vbGxhbWEuY29tL2Rvd25sb2Fk">https://ollama.com/download<i class="fa fa-external-link-alt"></i></span></li>
+<li>安装完成后，Ollama 提供了在终端直接运行 AI 模型的功能。</li>
+</ul>
+<h4 id="步骤-2：下载-DeepSeek-R1-模型"><a href="#步骤-2：下载-DeepSeek-R1-模型" class="headerlink" title="步骤 2：下载 DeepSeek R1 模型"></a>步骤 2：下载 DeepSeek R1 模型</h4><p>在终端中运行以下命令，根据你的硬件选择合适的模型：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 下载 <span class="number">1.</span>5B 版本（适用于 <span class="variable constant_">CPU</span> 及低配 <span class="variable constant_">GPU</span>）</span><br><span class="line">ollama run deepseek-<span class="attr">r1</span>:<span class="number">1.</span>5b</span><br><span class="line"></span><br><span class="line"># 下载 8B 版本</span><br><span class="line">ollama run deepseek-<span class="attr">r1</span>:8b</span><br><span class="line"></span><br><span class="line"># 下载 14B 版本</span><br><span class="line">ollama run deepseek-<span class="attr">r1</span>:14b</span><br><span class="line"></span><br><span class="line"># 下载 32B 版本</span><br><span class="line">ollama run deepseek-<span class="attr">r1</span>:32b</span><br><span class="line"></span><br><span class="line"># 下载 70B 版本（最高性能）</span><br><span class="line">ollama run deepseek-<span class="attr">r1</span>:70b</span><br></pre></td></tr></table></figure>
+
+<p>如果你不确定选择哪个版本，可以运行默认指令：</p>
+<p>默认情况下，该指令会下载 7B 版本。</p>
+<p>模型下载速度取决于网络状况，可能需要几分钟到几十分钟不等。</p>
+<h4 id="步骤-3：安装-Chatbox（可选）"><a href="#步骤-3：安装-Chatbox（可选）" class="headerlink" title="步骤 3：安装 Chatbox（可选）"></a>步骤 3：安装 Chatbox（可选）</h4><p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a817c19e.png" alt="chatbox_download.png">为了获得更好的交互体验，可以安装 Chatbox 作为 GUI 界面。</p>
+<ul>
+<li>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9jaGF0Ym94YWkuYXBwL2VuIw==">Chatbox AI: Your AI Copilot, Best AI Client on any device, Free Download<i class="fa fa-external-link-alt"></i></span></li>
+<li>安装完成后，进行以下配置：<ul>
+<li>在“配置 API 模型”选项中选择 Ollama API。</li>
+<li>设置 API 主机为：<span class="exturl" data-url="aHR0cDovLzEyNy4wLjAuMToxMTQzNC8=">http://127.0.0.1:11434<i class="fa fa-external-link-alt"></i></span></li>
+<li>选择 DeepSeek R1 作为默认模型。</li>
+<li>保存设置。</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、功能演示"><a href="#五、功能演示" class="headerlink" title="五、功能演示"></a><strong>五、功能演示</strong></h3><p>成功安装后，你可以测试 DeepSeek R1 的能力。例如，让它生成一个用 Python 编写的贪吃蛇游戏代码。</p>
+<p>输入 Prompt：</p>
+<p>示例代码（优化修正版本）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> turtle</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"># 窗口设置</span><br><span class="line"><span class="variable language_">window</span> = turtle.<span class="title class_">Screen</span>()</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">title</span>(<span class="string">&quot;贪吃蛇 by Python&quot;</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">bgcolor</span>(<span class="string">&quot;black&quot;</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">setup</span>(width=<span class="number">600</span>, height=<span class="number">600</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">tracer</span>(<span class="number">0</span>)  # 关闭自动刷新</span><br><span class="line"></span><br><span class="line"># 蛇头</span><br><span class="line">snake_head = turtle.<span class="title class_">Turtle</span>()</span><br><span class="line">snake_head.<span class="title function_">speed</span>(<span class="number">0</span>)</span><br><span class="line">snake_head.<span class="title function_">shape</span>(<span class="string">&quot;square&quot;</span>)</span><br><span class="line">snake_head.<span class="title function_">color</span>(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">snake_head.<span class="title function_">penup</span>()</span><br><span class="line">snake_head.<span class="title function_">goto</span>(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">snake_head.<span class="property">direction</span> = <span class="string">&quot;stop&quot;</span></span><br><span class="line"></span><br><span class="line"># 食物</span><br><span class="line">food = turtle.<span class="title class_">Turtle</span>()</span><br><span class="line">food.<span class="title function_">speed</span>(<span class="number">0</span>)</span><br><span class="line">food.<span class="title function_">shape</span>(<span class="string">&quot;circle&quot;</span>)</span><br><span class="line">food.<span class="title function_">color</span>(<span class="string">&quot;red&quot;</span>)</span><br><span class="line">food.<span class="title function_">penup</span>()</span><br><span class="line">food.<span class="title function_">goto</span>(<span class="number">0</span>, <span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">segments = []  # 蛇身体段</span><br><span class="line">score = <span class="number">0</span>  # 得分</span><br><span class="line"></span><br><span class="line"># 得分显示</span><br><span class="line">pen = turtle.<span class="title class_">Turtle</span>()</span><br><span class="line">pen.<span class="title function_">speed</span>(<span class="number">0</span>)</span><br><span class="line">pen.<span class="title function_">color</span>(<span class="string">&quot;white&quot;</span>)</span><br><span class="line">pen.<span class="title function_">penup</span>()</span><br><span class="line">pen.<span class="title function_">hideturtle</span>()</span><br><span class="line">pen.<span class="title function_">goto</span>(<span class="number">0</span>, <span class="number">260</span>)</span><br><span class="line">pen.<span class="title function_">write</span>(<span class="string">&quot;得分: 0&quot;</span>, align=<span class="string">&quot;center&quot;</span>, font=(<span class="string">&quot;Arial&quot;</span>, <span class="number">24</span>, <span class="string">&quot;normal&quot;</span>))</span><br><span class="line"></span><br><span class="line"># 移动函数</span><br><span class="line">def <span class="title function_">move</span>():</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> == <span class="string">&quot;up&quot;</span>:</span><br><span class="line">        y = snake_head.<span class="title function_">ycor</span>()</span><br><span class="line">        snake_head.<span class="title function_">sety</span>(y + <span class="number">20</span>)</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> == <span class="string">&quot;down&quot;</span>:</span><br><span class="line">        y = snake_head.<span class="title function_">ycor</span>()</span><br><span class="line">        snake_head.<span class="title function_">sety</span>(y - <span class="number">20</span>)</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> == <span class="string">&quot;left&quot;</span>:</span><br><span class="line">        x = snake_head.<span class="title function_">xcor</span>()</span><br><span class="line">        snake_head.<span class="title function_">setx</span>(x - <span class="number">20</span>)</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> == <span class="string">&quot;right&quot;</span>:</span><br><span class="line">        x = snake_head.<span class="title function_">xcor</span>()</span><br><span class="line">        snake_head.<span class="title function_">setx</span>(x + <span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"># 方向控制函数</span><br><span class="line">def <span class="title function_">go_up</span>():</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> != <span class="string">&quot;down&quot;</span>:</span><br><span class="line">        snake_head.<span class="property">direction</span> = <span class="string">&quot;up&quot;</span></span><br><span class="line"></span><br><span class="line">def <span class="title function_">go_down</span>():</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> != <span class="string">&quot;up&quot;</span>:</span><br><span class="line">        snake_head.<span class="property">direction</span> = <span class="string">&quot;down&quot;</span></span><br><span class="line"></span><br><span class="line">def <span class="title function_">go_left</span>():</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> != <span class="string">&quot;right&quot;</span>:</span><br><span class="line">        snake_head.<span class="property">direction</span> = <span class="string">&quot;left&quot;</span></span><br><span class="line"></span><br><span class="line">def <span class="title function_">go_right</span>():</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="property">direction</span> != <span class="string">&quot;left&quot;</span>:</span><br><span class="line">        snake_head.<span class="property">direction</span> = <span class="string">&quot;right&quot;</span></span><br><span class="line"></span><br><span class="line"># 键盘绑定</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">listen</span>()</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">onkeypress</span>(go_up, <span class="string">&quot;w&quot;</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">onkeypress</span>(go_down, <span class="string">&quot;s&quot;</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">onkeypress</span>(go_left, <span class="string">&quot;a&quot;</span>)</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">onkeypress</span>(go_right, <span class="string">&quot;d&quot;</span>)</span><br><span class="line"></span><br><span class="line"># 碰撞检测</span><br><span class="line">def <span class="title function_">check_collision</span>():</span><br><span class="line">    # 边界检测</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="title function_">xcor</span>() &gt; <span class="number">290</span> or snake_head.<span class="title function_">xcor</span>() &lt; -<span class="number">290</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">True</span></span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="title function_">ycor</span>() &gt; <span class="number">290</span> or snake_head.<span class="title function_">ycor</span>() &lt; -<span class="number">290</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">True</span></span><br><span class="line">    # 身体碰撞检测</span><br><span class="line">    <span class="keyword">for</span> segment <span class="keyword">in</span> <span class="attr">segments</span>:</span><br><span class="line">        <span class="keyword">if</span> snake_head.<span class="title function_">distance</span>(segment) &lt; <span class="number">20</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="title class_">True</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">False</span></span><br><span class="line"></span><br><span class="line"># 主游戏循环</span><br><span class="line"><span class="keyword">while</span> <span class="title class_">True</span>:</span><br><span class="line">    <span class="variable language_">window</span>.<span class="title function_">update</span>()</span><br><span class="line"></span><br><span class="line">    # 检查是否吃到食物</span><br><span class="line">    <span class="keyword">if</span> snake_head.<span class="title function_">distance</span>(food) &lt; <span class="number">20</span>:</span><br><span class="line">        # 移动食物到随机位置</span><br><span class="line">        x = random.<span class="title function_">randint</span>(-<span class="number">290</span>, <span class="number">290</span>)</span><br><span class="line">        y = random.<span class="title function_">randint</span>(-<span class="number">290</span>, <span class="number">290</span>)</span><br><span class="line">        food.<span class="title function_">goto</span>(x, y)</span><br><span class="line"></span><br><span class="line">        # 增加身体段</span><br><span class="line">        new_segment = turtle.<span class="title class_">Turtle</span>()</span><br><span class="line">        new_segment.<span class="title function_">speed</span>(<span class="number">0</span>)</span><br><span class="line">        new_segment.<span class="title function_">shape</span>(<span class="string">&quot;square&quot;</span>)</span><br><span class="line">        new_segment.<span class="title function_">color</span>(<span class="string">&quot;grey&quot;</span>)</span><br><span class="line">        new_segment.<span class="title function_">penup</span>()</span><br><span class="line">        segments.<span class="title function_">append</span>(new_segment)</span><br><span class="line"></span><br><span class="line">        # 增加得分</span><br><span class="line">        score += <span class="number">10</span></span><br><span class="line">        pen.<span class="title function_">clear</span>()</span><br><span class="line">        pen.<span class="title function_">write</span>(f<span class="string">&quot;得分: &#123;score&#125;&quot;</span>, align=<span class="string">&quot;center&quot;</span>, font=(<span class="string">&quot;Arial&quot;</span>, <span class="number">24</span>, <span class="string">&quot;normal&quot;</span>))</span><br><span class="line">    # 移动身体段（从后往前）</span><br><span class="line">    <span class="keyword">for</span> index <span class="keyword">in</span> <span class="title function_">range</span>(<span class="title function_">len</span>(segments)-<span class="number">1</span>, <span class="number">0</span>, -<span class="number">1</span>):</span><br><span class="line">        x = segments[index-<span class="number">1</span>].<span class="title function_">xcor</span>()</span><br><span class="line">        y = segments[index-<span class="number">1</span>].<span class="title function_">ycor</span>()</span><br><span class="line">        segments[index].<span class="title function_">goto</span>(x, y)</span><br><span class="line"></span><br><span class="line">    # 移动第一个身体段到头部位置</span><br><span class="line">    <span class="keyword">if</span> <span class="title function_">len</span>(segments) &gt; <span class="number">0</span>:</span><br><span class="line">        x = snake_head.<span class="title function_">xcor</span>()</span><br><span class="line">        y = snake_head.<span class="title function_">ycor</span>()</span><br><span class="line">        segments[<span class="number">0</span>].<span class="title function_">goto</span>(x, y)</span><br><span class="line">    <span class="title function_">move</span>()</span><br><span class="line"></span><br><span class="line">    # 碰撞检测</span><br><span class="line">    <span class="keyword">if</span> <span class="title function_">check_collision</span>():</span><br><span class="line">        time.<span class="title function_">sleep</span>(<span class="number">1</span>)</span><br><span class="line">        snake_head.<span class="title function_">goto</span>(<span class="number">0</span>, <span class="number">0</span>)</span><br><span class="line">        snake_head.<span class="property">direction</span> = <span class="string">&quot;stop&quot;</span></span><br><span class="line"></span><br><span class="line">        # 隐藏身体段</span><br><span class="line">        <span class="keyword">for</span> segment <span class="keyword">in</span> <span class="attr">segments</span>:</span><br><span class="line">            segment.<span class="title function_">goto</span>(<span class="number">1000</span>, <span class="number">1000</span>)</span><br><span class="line">        segments.<span class="title function_">clear</span>()</span><br><span class="line">        score = <span class="number">0</span></span><br><span class="line">        pen.<span class="title function_">clear</span>()</span><br><span class="line">        pen.<span class="title function_">write</span>(f<span class="string">&quot;得分: &#123;score&#125;&quot;</span>, align=<span class="string">&quot;center&quot;</span>, font=(<span class="string">&quot;Arial&quot;</span>, <span class="number">24</span>, <span class="string">&quot;normal&quot;</span>))</span><br><span class="line"></span><br><span class="line">    time.<span class="title function_">sleep</span>(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行这个程序前需要确保：</p>
+<ol>
+<li><p>已安装 Python 环境</p>
+</li>
+<li><p>需要安装 <code>turtle</code> 模块（通常 Python 标准库自带）</p>
+</li>
+</ol>
+<p>操作说明：</p>
+<ul>
+<li><p>W键：向上移动</p>
+</li>
+<li><p>S键：向下移动</p>
+</li>
+<li><p>A键：向左移动</p>
+</li>
+<li><p>D键：向右移动</p>
+</li>
+<li><p>吃到红色食物会增长身体并加分</p>
+</li>
+<li><p>撞到墙壁或自己身体会游戏重置</p>
+</li>
+</ul>
+<p>游戏特点：</p>
+<ol>
+<li><p>简单的图形界面</p>
+</li>
+<li><p>分数统计功能</p>
+</li>
+<li><p>碰撞检测</p>
+</li>
+<li><p>蛇身自动增长机制</p>
+</li>
+<li><p>游戏失败重置功能</p>
+</li>
+</ol>
+<p>你可以根据需求进一步添加以下功能：</p>
+<ul>
+<li><p>添加开始&#x2F;暂停按钮</p>
+</li>
+<li><p>增加难度等级</p>
+</li>
+<li><p>记录最高分</p>
+</li>
+<li><p>添加音效</p>
+</li>
+<li><p>设计更复杂的关卡</p>
+</li>
+</ul>
+<h3 id="六、总结"><a href="#六、总结" class="headerlink" title="六、总结"></a><strong>六、总结</strong></h3><p>通过本教程，你已经成功在本地部署了 DeepSeek R1，无论你是 AI 爱好者、开发者，还是仅仅对本地 AI 感兴趣，都可以尝试运行并训练自己的专属 AI 资料库。</p>
+<p>借助 Ollama 和 Chatbox 等工具，本地运行 AI 变得更加简单和高效。现在就开始探索吧！</p>
+<p>欢迎关注微信公众号“小七爱折腾”，咱们一起折腾起来。</p>
+<p>PS. 文章中用的相关软件可能下载的比较慢，可以到我的公众号回复“工具”获取网盘下载链接。 </p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6db9d.jpg" alt="王小七 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e4a669.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/DeepSeek/" rel="tag"># DeepSeek</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/dof-tools-skill.html" rel="prev" title="DOF-无脑技能修改工具使用方法">
+                  <i class="fa fa-angle-left"></i> DOF-无脑技能修改工具使用方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/deepseek-net-config.html" rel="next" title="DeepSeek系列-局域网访问与API对外开放配置">
+                  DeepSeek系列-局域网访问与API对外开放配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">王小七</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.wx7.space","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/deepseek-local-install.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
