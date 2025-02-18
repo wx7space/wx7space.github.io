@@ -25,9 +25,8 @@
 <meta property="og:site_name" content="小七爱折腾">
 <meta property="og:locale">
 <meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a815f5e1.png">
-<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5cbf62823.png">
 <meta property="article:published_time" content="2025-02-13T02:49:27.000Z">
-<meta property="article:modified_time" content="2025-02-13T04:06:43.797Z">
+<meta property="article:modified_time" content="2025-02-18T04:53:52.458Z">
 <meta property="article:author" content="王小七">
 <meta property="article:tag" content="DeepSeek">
 <meta name="twitter:card" content="summary">
@@ -116,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Ollama%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、Ollama环境变量介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ollama%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">Ollama环境变量全解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%85%8D%E7%BD%AEOLLAMA-HOST%E5%8F%8AOLLAMA-ORIGINS%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">二、为什么需要配置OLLAMA_HOST及OLLAMA_ORIGINS？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E7%AA%81%E7%A0%B4%E6%9C%AC%E5%9C%B0%E9%99%90%E5%88%B6%EF%BC%9A%E5%B1%80%E5%9F%9F%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">2.1.</span> <span class="nav-text">1. 突破本地限制：局域网访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%EF%BC%9AWeb-UI%E9%9B%86%E6%88%90"><span class="nav-number">2.2.</span> <span class="nav-text">2. 解决跨域问题：Web UI集成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%89%E5%85%A8%E4%B8%8E%E6%80%A7%E8%83%BD%E5%B9%B3%E8%A1%A1"><span class="nav-number">2.3.</span> <span class="nav-text">3. 安全与性能平衡</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%B7%A8%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE%E6%8C%87%E5%8D%97"><span class="nav-number">3.</span> <span class="nav-text">三、跨系统环境变量配置指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Windows%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.1.</span> <span class="nav-text">1. Windows系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Linux%E7%B3%BB%E7%BB%9F%EF%BC%88Systemd%E7%AE%A1%E7%90%86%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">2. Linux系统（Systemd管理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-macOS%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.3.</span> <span class="nav-text">3. macOS系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E6%88%98%EF%BC%9ADeepSeek%E6%A8%A1%E5%9E%8B%E9%83%A8%E7%BD%B2%E4%B8%8EAPI%E5%BC%80%E6%94%BE"><span class="nav-number">4.</span> <span class="nav-text">四、实战：DeepSeek模型部署与API开放</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E9%9C%80%E6%B1%82"><span class="nav-number">4.1.</span> <span class="nav-text">场景需求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.2.</span> <span class="nav-text">配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88Windows%E7%A4%BA%E4%BE%8B%EF%BC%89%EF%BC%9A"><span class="nav-number">4.2.1.</span> <span class="nav-text">设置环境变量（Windows示例）：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-number">4.3.</span> <span class="nav-text">性能优化建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-number">5.</span> <span class="nav-text">五、常见问题与解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%A1%AB%E5%9D%91%E6%93%8D%E4%BD%9C"><span class="nav-number">6.</span> <span class="nav-text">其他填坑操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E7%BB%93%E6%9D%9F"><span class="nav-number">7.</span> <span class="nav-text">六、结束</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Ollama%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、Ollama环境变量介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ollama%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%85%A8%E8%A7%A3%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">Ollama环境变量全解析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BF%AE%E6%94%B9-OLLAMA-HOST-%E5%92%8C-OLLAMA-ORIGINS"><span class="nav-number">2.</span> <span class="nav-text">二、修改 OLLAMA_HOST 和 OLLAMA_ORIGINS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AA%81%E7%A0%B4%E6%9C%AC%E5%9C%B0%E9%99%90%E5%88%B6%EF%BC%9A%E5%B1%80%E5%9F%9F%E7%BD%91%E8%AE%BF%E9%97%AE"><span class="nav-number">2.1.</span> <span class="nav-text">突破本地限制：局域网访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98%EF%BC%9AWeb-UI%E9%9B%86%E6%88%90"><span class="nav-number">2.2.</span> <span class="nav-text">解决跨域问题：Web UI集成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%8D%E5%90%8C%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">三、不同操作系统环境变量配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Linux%E7%B3%BB%E7%BB%9F%EF%BC%88Systemd%E7%AE%A1%E7%90%86%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">1. Linux系统（Systemd管理）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Windows%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.2.</span> <span class="nav-text">2. Windows系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%AE%8C%E6%95%B4%E7%9A%84%E9%85%8D%E7%BD%AE%E8%BF%87%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">四、完整的配置过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E7%9B%AE%E6%A0%87"><span class="nav-number">4.1.</span> <span class="nav-text">需求目标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.2.</span> <span class="nav-text">配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%88Linux-%E7%A4%BA%E4%BE%8B%EF%BC%89%EF%BC%9A"><span class="nav-number">4.2.1.</span> <span class="nav-text">设置环境变量（Linux 示例）：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="nav-number">4.3.</span> <span class="nav-text">性能优化建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%BB%93%E6%9D%9F"><span class="nav-number">5.</span> <span class="nav-text">五、结束</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -202,9 +201,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2025-02-13 10:49:27 / 修改时间：12:06:43" itemprop="dateCreated datePublished" datetime="2025-02-13T10:49:27+08:00">2025-02-13</time>
+      <time title="创建时间：2025-02-13 10:49:27" itemprop="dateCreated datePublished" datetime="2025-02-13T10:49:27+08:00">2025-02-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-18 12:53:52" itemprop="dateModified" datetime="2025-02-18T12:53:52+08:00">2025-02-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -247,13 +252,15 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a815f5e1.png" alt="deepseek-R1.png"><strong>本系列文章还有前序，结合一起使用</strong></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5a815f5e1.png" alt="deepseek-R1.png"></p>
+<p><strong>本系列文章还有前序，结合一起使用</strong></p>
 <blockquote>
 <p>在前面文章中，咱们已经在自己本地部署了deepseek了，那么在同一个局域网中的其他电脑怎么访问？模型提供的API怎么对外访问呢？</p>
 </blockquote>
-<p>通过前面文章介绍，我们已经在本地部署了deepseek，并且通过localhost或者是127.0.0.1可以正常访问到。但是，如果我们想要把这个本地部署的服务给别人使用，就会发现访问不了。同时，如果我们想要把本地的大模型通过API方式对外提供服务，通过IP访问不了。怎么办呢？本文，咱们就来解决这些问题。</p>
-<p>在解决这个问题前，咱们先要知道Ollama的环境变了及作用。</p>
-<h3 id="一、Ollama环境变量介绍"><a href="#一、Ollama环境变量介绍" class="headerlink" title="一、Ollama环境变量介绍"></a>一、Ollama环境变量介绍</h3><h4 id="Ollama环境变量全解析"><a href="#Ollama环境变量全解析" class="headerlink" title="Ollama环境变量全解析"></a>Ollama环境变量全解析</h4><table>
+<p>通过前面文章介绍《本地部署 DeepSeek R1 初体验》，我们已经在本地部署了deepseek，并且通过localhost或者是127.0.0.1可以正常访问到。但是，这个时候只能本地访问，这么好玩儿的东西不发给小伙伴儿一起玩儿岂不是浪费了。怎么办呢？本文，咱们就来解决这些问题。</p>
+<p>在前面的文章中，我们用的是 Ollama 这个软件作为载体，访问的DeepSeek R1模型，那么，让对外的功能能够实现对外访问，配置的 Ollama 的运行状态就可以了。</p>
+<h3 id="一、Ollama环境变量介绍"><a href="#一、Ollama环境变量介绍" class="headerlink" title="一、Ollama环境变量介绍"></a>一、Ollama环境变量介绍</h3><p>我们先来看看 Ollama 需要做哪些配置。跟我们功能相关的都在它的环境变量中。</p>
+<h4 id="Ollama环境变量全解析"><a href="#Ollama环境变量全解析" class="headerlink" title="Ollama环境变量全解析"></a>Ollama环境变量全解析</h4><table>
 <thead>
 <tr>
 <th>环境变量</th>
@@ -297,15 +304,9 @@
 <td>81920000000（80GB）</td>
 </tr>
 </tbody></table>
-<h3 id="二、为什么需要配置OLLAMA-HOST及OLLAMA-ORIGINS？"><a href="#二、为什么需要配置OLLAMA-HOST及OLLAMA-ORIGINS？" class="headerlink" title="二、为什么需要配置OLLAMA_HOST及OLLAMA_ORIGINS？"></a>二、为什么需要配置OLLAMA_HOST及OLLAMA_ORIGINS？</h3><h4 id="1-突破本地限制：局域网访问"><a href="#1-突破本地限制：局域网访问" class="headerlink" title="1. 突破本地限制：局域网访问"></a>1. <strong>突破本地限制：局域网访问</strong></h4><p>默认情况下，Ollama仅监听<code>127.0.0.1:11434</code>，仅允许本机访问。通过设置<strong>OLLAMA_HOST&#x3D;0.0.0.0:端口号</strong>，可将服务绑定到所有网络接口，实现局域网内多设备共享模型资源。</p>
-<h4 id="2-解决跨域问题：Web-UI集成"><a href="#2-解决跨域问题：Web-UI集成" class="headerlink" title="2. 解决跨域问题：Web UI集成"></a>2. <strong>解决跨域问题：Web UI集成</strong></h4><p>浏览器安全策略会阻止跨域请求，例如使用Open WebUI或LobeChat等前端工具时。配置<strong>OLLAMA_ORIGINS&#x3D;</strong>*（允许所有来源）或指定域名列表（如<code>&quot;http://localhost:3000,http://yourdomain.com&quot;</code>），可解除跨域限制。</p>
-<h4 id="3-安全与性能平衡"><a href="#3-安全与性能平衡" class="headerlink" title="3. 安全与性能平衡"></a>3. <strong>安全与性能平衡</strong></h4><p>开放访问需权衡风险，建议结合防火墙规则限制IP范围，或通过反向代理（如Nginx）添加HTTPS加密层。</p>
-<h3 id="三、跨系统环境变量配置指南"><a href="#三、跨系统环境变量配置指南" class="headerlink" title="三、跨系统环境变量配置指南"></a>三、跨系统环境变量配置指南</h3><h4 id="1-Windows系统"><a href="#1-Windows系统" class="headerlink" title="1. Windows系统"></a>1. <strong>Windows系统</strong></h4><ul>
-<li><strong>步骤1</strong>：右键“此电脑” → 属性 → 高级系统设置 → 环境变量 → 用户变量 → 新建变量。</li>
-<li><strong>步骤2</strong>：添加关键变量（如<code>OLLAMA_HOST</code>和<code>OLLAMA_ORIGINS</code>），保存后需<strong>彻底重启Ollama服务</strong>（通过任务管理器终止进程后重新启动）。</li>
-<li><strong>实战技巧</strong>：若模型路径含空格，需使用双引号包裹路径值（如<code>&quot;E:\AI Models\Ollama&quot;</code>）。</li>
-</ul>
-<h4 id="2-Linux系统（Systemd管理）"><a href="#2-Linux系统（Systemd管理）" class="headerlink" title="2. Linux系统（Systemd管理）"></a>2. <strong>Linux系统（Systemd管理）</strong></h4><p><strong>步骤1</strong>：编辑服务文件：</p>
+<h3 id="二、修改-OLLAMA-HOST-和-OLLAMA-ORIGINS"><a href="#二、修改-OLLAMA-HOST-和-OLLAMA-ORIGINS" class="headerlink" title="二、修改 OLLAMA_HOST 和 OLLAMA_ORIGINS"></a>二、修改 OLLAMA_HOST 和 OLLAMA_ORIGINS</h3><h4 id="突破本地限制：局域网访问"><a href="#突破本地限制：局域网访问" class="headerlink" title="突破本地限制：局域网访问"></a><strong>突破本地限制：局域网访问</strong></h4><p>Ollama 的默认配置是 <code>127.0.0.1:11434</code>， 也就是监听的是本地回环的IP地址，仅允许本机访问。把这个配置修改为<strong>OLLAMA_HOST&#x3D;0.0.0.0:端口号</strong>，就可以让服务开始监听所有的 IP 段，从而达到监听所有 IP 的效果。</p>
+<h4 id="解决跨域问题：Web-UI集成"><a href="#解决跨域问题：Web-UI集成" class="headerlink" title="解决跨域问题：Web UI集成"></a><strong>解决跨域问题：Web UI集成</strong></h4><p>还有一种情况，如果你使用 LobeChat，Chatbox， Open WebUI 等前端工具时，可能遇到浏览器安全策略会阻止跨域请求的问题。前文中，我们用在配置Chatbox 的时候，也做的对应的修改解除跨域限制。修改<strong>OLLAMA_ORIGINS&#x3D;</strong>*（允许所有来源）或指定域名列表（如<code>&quot;http://localhost:11434,https://www.wx7space.com&quot;</code>）。</p>
+<h3 id="三、不同操作系统环境变量配置"><a href="#三、不同操作系统环境变量配置" class="headerlink" title="三、不同操作系统环境变量配置"></a>三、不同操作系统环境变量配置</h3><h4 id="1-Linux系统（Systemd管理）"><a href="#1-Linux系统（Systemd管理）" class="headerlink" title="1. Linux系统（Systemd管理）"></a>1. <strong>Linux系统（Systemd管理）</strong></h4><p><strong>步骤1</strong>：编辑服务文件：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/system/ollama.<span class="property">service</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>步骤2</strong>：在<code>[Service]</code>段添加环境变量：</p>
@@ -314,21 +315,18 @@
 <p><strong>步骤3</strong>：重载配置并重启服务：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart ollama</span><br></pre></td></tr></table></figure>
 
-<h4 id="3-macOS系统"><a href="#3-macOS系统" class="headerlink" title="3. macOS系统"></a>3. <strong>macOS系统</strong></h4><p><strong>永久配置</strong>：编辑<code>.bash_profile</code>或<code>.zshrc</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="variable constant_">OLLAMA_HOST</span>=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">11434</span></span><br><span class="line"><span class="keyword">export</span> <span class="variable constant_">OLLAMA_ORIGINS</span>=<span class="string">&quot;*&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>临时生效</strong>：使用<code>launchctl</code>命令（重启后失效）：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">launchctl setenv <span class="variable constant_">OLLAMA_HOST</span> <span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">11434</span></span><br><span class="line">launchctl setenv <span class="variable constant_">OLLAMA_ORIGINS</span> <span class="string">&quot;*&quot;</span></span><br></pre></td></tr></table></figure>
-
-<hr>
-<h3 id="四、实战：DeepSeek模型部署与API开放"><a href="#四、实战：DeepSeek模型部署与API开放" class="headerlink" title="四、实战：DeepSeek模型部署与API开放"></a>四、实战：DeepSeek模型部署与API开放</h3><h4 id="场景需求"><a href="#场景需求" class="headerlink" title="场景需求"></a>场景需求</h4><ul>
-<li>在局域网内共享DeepSeek-R1模型</li>
-<li>允许前端应用通过<code>http://192.168.0.107:8080</code>调用API</li>
+<h4 id="2-Windows系统"><a href="#2-Windows系统" class="headerlink" title="2. Windows系统"></a>2. <strong>Windows系统</strong></h4><ul>
+<li><strong>步骤1</strong>：右键“此电脑” → 属性 → 高级系统设置 → 环境变量 → 用户变量 → 新建变量。</li>
+<li><strong>步骤2</strong>：添加关键变量（如<code>OLLAMA_HOST</code>和<code>OLLAMA_ORIGINS</code>），保存后需<strong>彻底重启Ollama服务</strong>（通过任务管理器终止进程后重新启动）。</li>
+<li><strong>注意</strong>：若模型路径含空格，需使用双引号包裹路径值（如<code>&quot;G:\DeepSeek_Models&quot;</code>）。</li>
 </ul>
-<h4 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h4><h5 id="设置环境变量（Windows示例）："><a href="#设置环境变量（Windows示例）：" class="headerlink" title="设置环境变量（Windows示例）："></a><strong>设置环境变量</strong>（Windows示例）：</h5><p>需要修改如下三个环境变量</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">OLLAMA_HOST</span>=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8080</span></span><br><span class="line"><span class="variable constant_">OLLAMA_ORIGINS</span>=*</span><br><span class="line"><span class="variable constant_">OLLAMA_MODELS</span>=<span class="attr">G</span>:\<span class="title class_">DeepSeek</span>_Models</span><br></pre></td></tr></table></figure>
+<h3 id="四、完整的配置过程"><a href="#四、完整的配置过程" class="headerlink" title="四、完整的配置过程"></a>四、完整的配置过程</h3><h4 id="需求目标"><a href="#需求目标" class="headerlink" title="需求目标"></a>需求目标</h4><ul>
+<li>在局域网内共享DeepSeek-R1模型</li>
+<li>使用前端应用通过<code>http://192.168.0.107:8080</code>调用本地部署 API</li>
+</ul>
+<h4 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h4><h5 id="设置环境变量（Linux-示例）："><a href="#设置环境变量（Linux-示例）：" class="headerlink" title="设置环境变量（Linux 示例）："></a><strong>设置环境变量</strong>（Linux 示例）：</h5><p>需要修改如下三个环境变量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">OLLAMA_HOST</span>=<span class="number">0.0</span><span class="number">.0</span><span class="number">.0</span>:<span class="number">8080</span></span><br><span class="line"><span class="variable constant_">OLLAMA_ORIGINS</span>=*</span><br></pre></td></tr></table></figure>
 
-<p>windows 的环境变量在“计算机”-&gt;”属性”-&gt;”高级系统设置”-&gt;”环境变量” 里面设置，新增这三个环境变量。</p>
 <p><strong>重启服务并加载模型</strong>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ollama run deepseek-<span class="attr">r1</span>:<span class="number">1.</span>5b</span><br></pre></td></tr></table></figure>
 
@@ -336,30 +334,12 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl <span class="attr">http</span>:<span class="comment">//192.168.1.100:8080/api/generate -d &#x27;&#123;&quot;model&quot;:&quot;deepseek-r1:1.5b&quot;, &quot;prompt&quot;:&quot;你好&quot;&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="性能优化建议"><a href="#性能优化建议" class="headerlink" title="性能优化建议"></a>性能优化建议</h4><ul>
-<li>使用<code>OLLAMA_KEEP_ALIVE=48h</code>减少频繁模型加载</li>
-<li>结合<code>OLLAMA_NUM_PARALLEL=4</code>提升并发处理能力913</li>
+<li>如果内容足够的话，使用<code>OLLAMA_KEEP_ALIVE=48h</code> 可以减少频繁模型加载（用空间换时间）</li>
+<li>修改 <code>OLLAMA_NUM_PARALLEL=4</code> 提升并发处理能力</li>
 </ul>
 <hr>
-<h3 id="五、常见问题与解决方案"><a href="#五、常见问题与解决方案" class="headerlink" title="五、常见问题与解决方案"></a>五、常见问题与解决方案</h3><ol>
-<li><strong>环境变量未生效</strong><ol>
-<li>Windows：检查进程是否完全重启，避免残留旧配置。</li>
-<li>macOS：使用<code>env | grep OLLAMA</code>确认变量已加载，或尝试<code>launchctl</code>临时方案。</li>
-</ol>
-</li>
-<li><strong>跨域配置错误</strong><ol>
-<li>若前端仍报CORS错误，检查<code>OLLAMA_ORIGINS</code>是否包含协议和端口（如<code>http://localhost:3000</code>）。</li>
-</ol>
-</li>
-<li><strong>端口冲突</strong><ol>
-<li>通过<code>netstat -ano | findstr :8080</code>（Windows）或<code>lsof -i :8080</code>（Linux&#x2F;macOS）排查占用端口。</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p>通过合理配置环境变量，Ollama可轻松实现从单机工具到团队协作平台的转型。掌握这些技巧后，开发者不仅能高效管理本地大模型，还能将其无缝集成至更复杂的AI应用生态中。</p>
-<h3 id="其他填坑操作"><a href="#其他填坑操作" class="headerlink" title="其他填坑操作"></a>其他填坑操作</h3><p>在之前本地部署后，想要通过ip访问ollama-web-ui，发现不能正常访问。其实这里有个小小的坑。那就是ollama-web-ui中把访问Ollama的ip写死了。具体修改地方： 使用编辑器或者是文本编辑找到constants.ts文件，然后如下图修改就可以了。<img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/13/67ad5cbf62823.png" alt="ollama-web-ui.png"></p>
-<p>修改完成之后，重启ollama-webui就可以了。</p>
-<h3 id="六、结束"><a href="#六、结束" class="headerlink" title="六、结束"></a>六、结束</h3><p>至此，你已经用于一个运行于本地的 DeepSeek R1 模型了。接下来就可以开始你的表演了。想怎么玩儿就看你自己怎么折腾了。</p>
+<p>完成以上配置后，就可以实现局域网访问 API 了。</p>
+<h3 id="五、结束"><a href="#五、结束" class="headerlink" title="五、结束"></a>五、结束</h3><p>至此，你已经用于一个运行于本地的 DeepSeek R1 模型了。接下来就可以开始你的表演了。想怎么玩儿就看你自己怎么折腾了。</p>
 <p>欢迎关注微信公众号“小七爱折腾”，咱们一起折腾起来。</p>
 
     </div>
