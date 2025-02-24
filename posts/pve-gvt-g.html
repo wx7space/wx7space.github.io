@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha256-XOqroi11tY4EFQMR9ZYwZWKj5ZXiftSx36RRuC3anlA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"wx7.space","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.20.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="​PVE系列-开启GVT-g核显虚拟化​(Intel6-10代CPU)">
+<meta property="og:url" content="https://wx7.space/posts/pve-gvt-g.html">
+<meta property="og:site_name" content="小七爱折腾">
+<meta property="og:locale">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/24/67bc43ba1289b.png">
+<meta property="og:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/24/67bc43ba18cf3.png">
+<meta property="article:published_time" content="2025-02-24T08:54:58.000Z">
+<meta property="article:modified_time" content="2025-02-24T10:21:28.995Z">
+<meta property="article:author" content="王小七">
+<meta property="article:tag" content="PVE">
+<meta property="article:tag" content="PVE分配虚拟核显">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/24/67bc43ba1289b.png">
+
+
+<link rel="canonical" href="https://wx7.space/posts/pve-gvt-g">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh","comments":true,"permalink":"https://wx7.space/posts/pve-gvt-g.html","path":"/posts/pve-gvt-g.html","title":"​PVE系列-开启GVT-g核显虚拟化​(Intel6-10代CPU)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>​PVE系列-开启GVT-g核显虚拟化​(Intel6-10代CPU) | 小七爱折腾</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js"></script>
+  <script async src="https://hm.baidu.com/hm.js?dd4faafdc1be82fcc7cfcfc86d57e252"></script>
+
+
+
+
+
+
+<link rel="dns-prefetch" href="https://waline.wx7.space">
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">小七爱折腾</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">折腾过程中的踩坑记录</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-%E5%87%A0%E5%8F%A5%E5%BA%9F%E8%AF%9D"><span class="nav-number">1.</span> <span class="nav-text">前言-几句废话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CPU%E6%94%AF%E6%8C%81%E6%83%85%E5%86%B5"><span class="nav-number">2.</span> <span class="nav-text">CPU支持情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">配置步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E7%A1%AC%E4%BB%B6%E7%9B%B4%E9%80%9A%E5%92%8CGVT-g"><span class="nav-number">3.1.</span> <span class="nav-text">开启硬件直通和GVT-g</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97"><span class="nav-number">3.2.</span> <span class="nav-text">加载内核模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%9B%B4%E6%96%B0initramfs"><span class="nav-number">3.3.</span> <span class="nav-text">执行更新initramfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81%E6%98%AF%E5%90%A6%E5%BC%80%E5%90%AF%E6%A0%B8%E6%98%BEGVT-g"><span class="nav-number">3.4.</span> <span class="nav-text">验证是否开启核显GVT-g</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A0%B8%E6%98%BEGVT-g%E7%9A%84Win%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%8F%82%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">创建核显GVT-g的Win虚拟机参数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BAwin10%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%8822H2%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">创建win10虚拟机（22H2）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E6%9D%9F"><span class="nav-number">5.</span> <span class="nav-text">结束</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%99%84%EF%BC%9A%E9%A9%B1%E5%8A%A8%E4%B8%8B%E8%BD%BD"><span class="nav-number">6.</span> <span class="nav-text">附：驱动下载</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="王小七"
+      src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
+  <p class="site-author-name" itemprop="name">王小七</p>
+  <div class="site-description" itemprop="description">把有限的生命投入到无限的折腾中去</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOnZlbnVzd2FuZzIwMTRAb3V0bG9vay5jb20=" title="E-Mail → mailto:venuswang2014@outlook.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://wx7.space/posts/pve-gvt-g.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6b60c.jpg">
+      <meta itemprop="name" content="王小七">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小七爱折腾">
+      <meta itemprop="description" content="把有限的生命投入到无限的折腾中去">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="​PVE系列-开启GVT-g核显虚拟化​(Intel6-10代CPU) | 小七爱折腾">
+      <meta itemprop="description" content="PVE 虚拟机创建好之后，即使CPU有核显，也并不是能够被虚拟机直接使用的，与CPU不一样的是，核显需要通过配置将核显虚拟化之后，才能分配给虚拟机。本文记录的说将Intel核心显卡通过配置，分配给虚拟机的方法。">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ​PVE系列-开启GVT-g核显虚拟化​(Intel6-10代CPU)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-02-24 16:54:58 / 修改时间：18:21:28" itemprop="dateCreated datePublished" datetime="2025-02-24T16:54:58+08:00">2025-02-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PVE%E7%B3%BB%E5%88%97/" itemprop="url" rel="index"><span itemprop="name">PVE系列</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+  
+  <span class="post-meta-item">
+    
+    <span class="post-meta-item-icon">
+      <i class="far fa-comment"></i>
+    </span>
+    <span class="post-meta-item-text">Waline：</span>
+  
+    <a title="waline" href="/posts/pve-gvt-g.html#waline" itemprop="discussionUrl">
+      <span class="post-comments-count waline-comment-count" data-path="/posts/pve-gvt-g.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+</div>
+
+            <div class="post-description">PVE 虚拟机创建好之后，即使CPU有核显，也并不是能够被虚拟机直接使用的，与CPU不一样的是，核显需要通过配置将核显虚拟化之后，才能分配给虚拟机。本文记录的说将Intel核心显卡通过配置，分配给虚拟机的方法。</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="前言-几句废话"><a href="#前言-几句废话" class="headerlink" title="前言-几句废话"></a>前言-几句废话</h2><p>可能更多的人需要的是显卡直通，就是将整个显卡直通给某一个虚拟机，然后将显示器直接插到视频输出口显示的是这台虚拟机的内容，然后再通过键盘、鼠标的直通，达到与一台实体机一样使用的效果。</p>
+<p>核显虚拟化并不是这样，显卡虚拟化是通过将核心显卡虚拟化配置之后，可以分配给虚拟机，让虚拟机也可以使用核心显卡。并且，可以根据需要分配给多个虚拟机（不同的CPU能分配的虚拟核数不同）。</p>
+<h2 id="CPU支持情况"><a href="#CPU支持情况" class="headerlink" title="CPU支持情况"></a>CPU支持情况</h2><p>请参阅下表：</p>
+<p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/24/67bc43ba1289b.png" alt="intel-cpu.png"></p>
+<p>注意，11代Alchemist代号并不支持SR-IOV，也不支持GVT-g​</p>
+<h2 id="配置步骤"><a href="#配置步骤" class="headerlink" title="配置步骤"></a>配置步骤</h2><p>前提条件：需要提前在主板BIOS开启虚拟化功能，才能开启硬件直通。在BIOS开启vt-d​。</p>
+<h3 id="开启硬件直通和GVT-g"><a href="#开启硬件直通和GVT-g" class="headerlink" title="开启硬件直通和GVT-g"></a>开启硬件直通和GVT-g</h3><p>使用文本编辑器（nano​ 或 vim 均可） 编辑配置文件 &#x2F;etc&#x2F;default&#x2F;grub​</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># vi /etc/default/grub</span><br><span class="line"></span><br><span class="line"># 开启iommu分组和GVT-g，在里面找到：GRUB_CMDLINE_&lt;a href=&quot;https://www.iigeek.com/archives/tag/linux&quot;&gt;&lt;b style=&quot;color:#378e3c&quot;&gt;linux&lt;/b&gt;&lt;/a&gt;_DEFAULT=&quot;quiet&quot;项将其修改为</span><br><span class="line">GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet intel_iommu=on iommu=pt i915.enable_gvt=1 pcie_acs_override=downstream,multifunction&quot;</span><br><span class="line"></span><br><span class="line"># 更新grub</span><br><span class="line">update-grub</span><br></pre></td></tr></table></figure>
+
+<h3 id="加载内核模块"><a href="#加载内核模块" class="headerlink" title="加载内核模块"></a>加载内核模块</h3><p>编辑配置文件 &#x2F;etc&#x2F;modules​</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vfio</span><br><span class="line">vfio_iommu_type1</span><br><span class="line">vfio_pci</span><br><span class="line">vfio_virqfd</span><br><span class="line">kvmgt</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行更新initramfs"><a href="#执行更新initramfs" class="headerlink" title="执行更新initramfs"></a>执行更新initramfs</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 更新initramfs</span><br><span class="line">update-initramfs -u -k all</span><br><span class="line"></span><br><span class="line"># 重启</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<h3 id="验证是否开启核显GVT-g"><a href="#验证是否开启核显GVT-g" class="headerlink" title="验证是否开启核显GVT-g"></a>验证是否开启核显GVT-g</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ls /sys/bus/pci/devices/0000:00:02.0/mdev_supported_types</span><br><span class="line"></span><br><span class="line"># 显示有2个或者更多即成功，UHD630核显最多可以开2个</span><br><span class="line"></span><br><span class="line">i915-GVTg_V5_4 i915-GVTg_V5_8</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="创建核显GVT-g的Win虚拟机参数"><a href="#创建核显GVT-g的Win虚拟机参数" class="headerlink" title="创建核显GVT-g的Win虚拟机参数"></a>创建核显GVT-g的Win虚拟机参数</h2><p>按以下虚拟机参数模板建立好虚拟机，打上核显驱动就能正常使用核显了。</p>
+<h3 id="创建win10虚拟机（22H2）"><a href="#创建win10虚拟机（22H2）" class="headerlink" title="创建win10虚拟机（22H2）"></a>创建win10虚拟机（22H2）</h3><blockquote>
+<p>名称：随便<br>光驱0挂载：Win安装ISO镜像<br>光驱1挂载：virtIO驱动ISO镜像<br>显示：VirtIO-GPU<br>机型：q35<br>BIOS：OVMF<br>EFI分区：UEFI（OVMF）需要<br>磁盘：SCSI 大小40G（按需设置，或硬盘直通）<br>CPU：host 核心数量4（按需设置）<br>内存：4G及以上<br>网络：virtIO（半虚拟化或网卡直通）网卡<br>添加PCI设备：核显GVT-g（勾选ROM-Bar和PCIE在Mdev类型中选择vgpu设备i915-GVTg_V5_8）<br>音频设备：ich9-intel-hda&#x2F;后端驱动器：无</p>
+</blockquote>
+<h2 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h2><p>Intel GVT-g是显卡虚拟化技术，不同于PCI-E设备直通，GVT-g可以虚拟出多个虚拟机的GPU，从而有效地在虚拟机中提供接近宿主机的图形性能，并且仍然让主机正常使用虚拟化的GPU。各有各的应用场景。</p>
+<p>到这里这次折腾就结束了，效果如图。</p>
+<p><img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2025/02/24/67bc43ba18cf3.png" alt="windows-gpu.png"></p>
+<h2 id="附：驱动下载"><a href="#附：驱动下载" class="headerlink" title="附：驱动下载"></a>附：驱动下载</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">virtIO驱动ISO：</span><br><span class="line">https://yun.yangwenqing.com/Linux/DD/virtio-win-0.1.229.iso</span><br><span class="line"></span><br><span class="line"># 7-10代核显驱动：</span><br><span class="line">https://www.intel.cn/content/www/cn/zh/download/776137/intel-7th-10th-gen-processor-graphics-&lt;a href=&quot;https://www.iigeek.com/archives/tag/windows&quot;&gt;&lt;b style=&quot;color:#378e3c&quot;&gt;**windows**&lt;/b&gt;&lt;/a&gt;.html</span><br><span class="line"></span><br><span class="line"># 11-13代核显驱动：</span><br><span class="line">https://www.intel.cn/content/www/cn/zh/download/785597/intel-arc-iris-xe-graphics-windows.html</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e6db9d.jpg" alt="王小七 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <span class="social-link">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">WeChat</span>
+          </span>
+
+          <img class="social-item-img" src="https://z7pic-1251567371.cos.ap-hongkong.myqcloud.com/2024/10/23/6718b84e4a669.jpg">
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/PVE/" rel="tag"># PVE</a>
+              <a href="/tags/PVE%E5%88%86%E9%85%8D%E8%99%9A%E6%8B%9F%E6%A0%B8%E6%98%BE/" rel="tag"># PVE分配虚拟核显</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/posts/deepseek-net-config.html" rel="prev" title="DeepSeek系列-局域网访问与API对外开放配置">
+                  <i class="fa fa-angle-left"></i> DeepSeek系列-局域网访问与API对外开放配置
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments" id="waline"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">王小七</span>
+  </div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+<script class="next-config" data-name="waline" type="application/json">{"lang":"zh-cn","enable":true,"serverURL":"https://waline.wx7.space","cssUrl":"https://unpkg.com/@waline/client@v2/dist/waline.css","commentCount":true,"pageview":false,"placeholder":"请文明评论呀","avatar":"mm","meta":["nick","mail","link"],"pageSize":10,"visitor":false,"comment_count":true,"requiredFields":["nick","mail"],"libUrl":"//unpkg.com/@waline/client@v2/dist/waline.js","el":"#waline","comment":true,"path":"/posts/pve-gvt-g.html"}</script>
+<link rel="stylesheet" href="https://unpkg.com/@waline/client@v2/dist/waline.css">
+<script>
+document.addEventListener('page:loaded', () => {
+  NexT.utils.loadComments(CONFIG.waline.el).then(() =>
+    NexT.utils.getScript(CONFIG.waline.libUrl, { condition: window.Waline })
+  ).then(() => 
+    Waline.init(Object.assign({}, CONFIG.waline,{ el: document.querySelector(CONFIG.waline.el) }))
+  );
+});
+</script>
+
+</body>
+</html>
